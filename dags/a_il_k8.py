@@ -45,7 +45,7 @@ except ImportError:
 
 if k8s:
     with DAG(
-        dag_id="example_kubernetes_executor",
+        dag_id="a_il_k8s",
         schedule=None,
         start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
         catchup=False,
