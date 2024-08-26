@@ -3,6 +3,7 @@ from airflow import DAG
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
+from textwrap import dedent
 from airflow.operators.email_operator import EmailOperator
 from airflow.providers.amazon.aws.notifications.sns import send_sns_notification
 
@@ -13,7 +14,7 @@ sns_topic_arn = "arn:aws:sns:ap-east-1:695314914535:airflow-sns-tpoic"
 dag_failure_sns_notification = send_sns_notification(
     aws_conn_id="aws_connection",
     region_name="ap-east-1",
-    message="The DAG {{ dag.dag_id }} failed -------------------",
+    message="The DAG {{ dag.dag_id }} failed",
     target_arn=sns_topic_arn,
 )
 
@@ -40,18 +41,18 @@ with DAG(
     catchup=False,
     # on_failure_callback=task_failure_alert,
 ) as dag:
-    # email_status = EmailOperator(
-    #     mime_charset='utf-8',
-    #     task_id="email_testing",
-    #     to="loyanngai@hotmail.com",
-    #     subject="Test from SES",
-    #     html_content="Trying to send an email from airflow through SES.",
-    #     on_failure_callback=dag_failure_sns_notification
-    # )
+    email_status = EmailOperator(
+        mime_charset='utf-8',
+        task_id="email_testing",
+        to="loyanngai@hotmail.com",
+        subject="Test from SES",
+        html_content="Trying to send an email from airflow through SES.",
+        on_failure_callback=dag_failure_sns_notification
+    )
     a_il_test_fail_5 = PythonOperator(
         task_id="test_sns_fallback",
         python_callable=lambda: 1 / 0,
-        on_failure_callback=dag_failure_sns_notification
+        on_failure_callback=task_failure_alert
     )
 
-    a_il_test_fail_5
+    email_status >> a_il_test_fail_5
