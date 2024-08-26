@@ -23,15 +23,15 @@ def task_failure_alert(context):
     print(f"Task has failed, task_instance_key_str:---------------------")
 
 
-# def dag_check_SNS(context):
+def dag_check_SNS(context):
 
-#     sns = SnsPublishOperator(
-#         task_id="check_list",
-#         target_arn=sns_topic_arn,
-#         subject=f"testing-subject{context['task_instance_key_str']}",
-#         message="testing-content",
-#     )
-#     sns.execute(context)
+    sns = SnsPublishOperator(
+        task_id="check_list",
+        target_arn=sns_topic_arn,
+        subject=f"testing-subject{context['task_instance_key_str']}",
+        message="testing-content",
+    )
+    sns.execute(context)
 
 
 with DAG(
@@ -52,7 +52,7 @@ with DAG(
     a_il_test_fail_5 = PythonOperator(
         task_id="test_sns_fallback",
         python_callable=lambda: 1 / 0,
-        on_failure_callback=task_failure_alert
+        on_failure_callback=dag_check_SNS
     )
 
     a_il_test_fail_5
