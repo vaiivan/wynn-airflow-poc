@@ -72,12 +72,12 @@ if k8s:
                             ],
                         )
                     ],
-                    # volumes=[
-                    #     k8s.V1Volume(
-                    #         name="example-kubernetes-test-volume",
-                    #         persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(claim_name="airflow-logs-50gbs"),
-                    #     )
-                    # ],
+                    volumes=[
+                        k8s.V1Volume(
+                            name="example-kubernetes-test-volume",
+                            persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(claim_name="airflow-logs-50gbs"),
+                        )
+                    ],
                 )
             ),
         }
