@@ -75,7 +75,7 @@ if k8s:
                     volumes=[
                         k8s.V1Volume(
                             name="example-kubernetes-test-volume",
-                            host_path=k8s.V1HostPathVolumeSource(path="/tmp/"),
+                            persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(claim_name="airflow-logs-50gbs"),
                         )
                     ],
                 )
