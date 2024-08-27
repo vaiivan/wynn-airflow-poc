@@ -64,14 +64,14 @@ if k8s:
         executor_config_volume_mount = {
             "pod_override": k8s.V1Pod(
                 spec=k8s.V1PodSpec(
-                    containers=[
-                        k8s.V1Container(
-                            name="base",
-                            volume_mounts=[
-                                k8s.V1VolumeMount(mount_path="/", name="example-kubernetes-test-volume")
-                            ],
-                        )
-                    ],
+                    # containers=[
+                    #     k8s.V1Container(
+                    #         name="base",
+                    #         volume_mounts=[
+                    #             k8s.V1VolumeMount(mount_path="/", name="example-kubernetes-test-volume")
+                    #         ],
+                    #     )
+                    # ],
                     volumes=[
                         k8s.V1Volume(
                             name="example-kubernetes-test-volume",
