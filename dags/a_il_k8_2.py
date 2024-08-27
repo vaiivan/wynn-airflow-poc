@@ -152,7 +152,7 @@ if k8s:
 
         executor_config_other_ns = {
             "pod_override": k8s.V1Pod(
-                metadata=k8s.V1ObjectMeta(namespace="test-namespace", labels={"release": "stable"})
+                metadata=k8s.V1ObjectMeta(namespace="airflow", labels={"release": "stable"})
             )
         }
 
