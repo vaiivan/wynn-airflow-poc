@@ -11,7 +11,7 @@ time_now = datetime.now(timezone(timedelta(hours=8))).strftime('%Y%m%d %H:%M:%S'
 dag_failure_sns_notification = send_sns_notification(
     aws_conn_id="aws_connection",
     region_name="ap-east-1",
-    message=f"The DAG {{ dag.dag_id }} failed at {time_now}",
+    message="The DAG {{ dag.dag_id }} failed at " + f"{time_now}",
     target_arn=sns_topic_arn,
 )
 
