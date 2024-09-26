@@ -9,7 +9,7 @@ import json
 import pandas as pd
 #sys.path.append("/home/tempadmin/scripts") ###
 #from window_config import *
-import pymssql
+#import pymssql
 from requests.auth import HTTPBasicAuth
 from datetime import timedelta , time, datetime
 
