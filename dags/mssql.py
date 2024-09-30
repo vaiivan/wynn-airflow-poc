@@ -60,7 +60,7 @@ def get_dim_metadata_hook():
 
 
 with DAG(
-    dag_id = 'tian_adex_scheduler',
+    dag_id = 'adex_scheduler',
     default_args = default_args,
     description = 'Adex Migration Scheduler.',
     schedule_interval=timedelta(days=1),
