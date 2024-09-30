@@ -27,9 +27,9 @@ from airflow.providers.microsoft.mssql.hooks.mssql import MsSqlHook
 from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
 
 default_args = {
-    'owner': 'tianyanjing',
+    'owner': 'alex',
     'depends_on_past': False,
-    'email': ['tianyanjing@ctrchina.cn'],
+    'email': ['alex.kh.chan@wynnpalace.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
