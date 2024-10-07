@@ -61,7 +61,8 @@ dag = DAG(
 SHARED_PVC_NAME = 'airflow-logs-50gbs'
 
 # Define the mount path inside the container
-MOUNT_PATH = '/mnt/shared'
+#MOUNT_PATH = '/mnt/shared'
+MOUNT_PATH = '/opt/airflow/logs'
 
 # Add this near the top of your script, after the MOUNT_PATH definition
 LOG_DIR = f"{MOUNT_PATH}"
@@ -134,21 +135,21 @@ t1 = PythonOperator(
     provide_context=True,
     python_callable=main,
     dag=dag,
-    max_active_tis_per_dag=1,
-    executor_config={
-        "pod_override": k8s.V1Pod(
-            spec=k8s.V1PodSpec(
-                containers=[
-                    k8s.V1Container(
-                        name="base",
-                        volume_mounts=[volume_mount],
-                        env=[k8s.V1EnvVar(name="LOG_DIR", value=LOG_DIR)]
-                    )
-                ],
-                volumes=[volume],
-            )
-        )
-    }
+    max_active_tis_per_dag=1
+#    executor_config={
+#        "pod_override": k8s.V1Pod(
+#            spec=k8s.V1PodSpec(
+#                containers=[
+#                    k8s.V1Container(
+#                        name="base",
+#                        volume_mounts=[volume_mount],
+#                        env=[k8s.V1EnvVar(name="LOG_DIR", value=LOG_DIR)]
+#                    )
+#                ],
+#                volumes=[volume],
+#            )
+#        )
+#    }
 )
 
 
